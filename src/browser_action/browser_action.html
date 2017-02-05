@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+	<style>
+	body {
+		width: 400px;
+		padding: 5px 10px;
+		overflow-y: scroll;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<table class="table table-hover table-popup">
+				<thead>
+					<tr>
+						<th>
+							<button type="button" class="btn btn-link btn-sm" id="btn-settings">
+								<span class="glyphicon glyphicon-cog"></span>
+							</button>
+						</th>
+						<th>Аккаунт</th>
+						<th class="text-center">Ресурс</th>
+						<th class="text-center">Карма</th>
+						<th class="text-center">Рейтинг</th>
+					</tr>
+				</thead>
+				<tbody id="accounts">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Template for account row -->
+	<template id="account-row">
+		<tr>
+			<td><img class="img-account img-rounded account-avatar"></td>
+			<td class="account-name"></td>
+			<td class="text-center"><img class="img-resource account-resource"></td>
+			<td class="account-karma text-center"></td>
+			<td class="account-rating text-center"></td>
+		</tr>
+	</template>
+
+	<script type="text/javascript" src="browser_action.js"></script>
+</body>
+</html>

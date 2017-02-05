@@ -1,0 +1,29 @@
+.img-account, .img-resource {
+    width: 32px;
+    height: 32px;
+}
+
+.input-update-delay {
+    width: 60px !important;
+    margin: 0 15px;
+}
+
+/*
+    The selector **has** to be that specific to redefine Bootstrap's default.
+    https://stackoverflow.com/questions/27747072/vertical-align-in-bootstrap-table
+*/
+.table > thead > tr > th, .table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+.account-karma {
+    color: #6c9007;
+}
+
+.account-karma-low {
+    color: #d53c30;
+}
+
+.account-rating {
+    color: #c6c;
+}
