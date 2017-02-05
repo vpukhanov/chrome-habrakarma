@@ -8,6 +8,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "default_locale": "ru",
   "background": {
     "scripts": [ "js/jquery.min.js", "src/bg/background.js" ],
     "persistent": true
