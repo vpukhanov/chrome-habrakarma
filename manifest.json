@@ -1,8 +1,8 @@
 {
   "name": "ХабраКарма",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
-  "description": "Позволяет вам отслеживать карму пользователей на habrahabr.ru и geektimes.ru",
+  "description": "Позволяет вам отслеживать карму пользователей на ресурсах Хабрахабр и Гиктаймс",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -10,7 +10,7 @@
   },
   "default_locale": "ru",
   "background": {
-    "scripts": [ "js/jquery.min.js", "src/bg/background.js" ],
+    "page": "src/bg/background.html",
     "persistent": true
   },
   "options_page": "src/options/index.html",

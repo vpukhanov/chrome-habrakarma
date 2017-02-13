@@ -15,36 +15,32 @@ function updateBadge(user) {
     }
     requestUrl += user.name;
 
-    $.ajax({
-        url: requestUrl,
-        type: 'GET',
-        dataType: 'html',
-        success: function(userPage) {
-            var tmpEl = $('<div>');
-            tmpEl.html(userPage);
-
-            var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
-            var karma = karmaElement.text();
-
-            if (karma[0] === '–') {
-                karma[0] = '-';
-                chrome.browserAction.setBadgeBackgroundColor({ color: '#d53c30' });
-            } else {
-                chrome.browserAction.setBadgeBackgroundColor({ color: '#6c9007' });
-            }
-
-            if (karma.length > 4) {
-                karma = '' + parseInt(karma, 10);
-                if (karma[0] !== '-') {
-                    karma = '≈' + karma;
-                }
-            }
-
-            chrome.browserAction.setBadgeText({ text: karma });
-        },
-        error: function() {
+    getDom(requestUrl, function(err, dom) {
+        if (err) {
             chrome.browserAction.setBadgeText({ text: '' });
+            return;
         }
+
+        var tmpEl = $(dom);
+
+        var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
+        var karma = karmaElement.text();
+        karma = karma.replace(/\u2013|\u2014/g, '-');
+
+        if (karma[0] === '-') {
+            chrome.browserAction.setBadgeBackgroundColor({ color: '#d53c30' });
+        } else {
+            chrome.browserAction.setBadgeBackgroundColor({ color: '#6c9007' });
+        }
+
+        if (karma.length > 4) {
+            karma = '' + parseInt(karma, 10);
+            if (karma[0] !== '-') {
+                karma = '\u2248' + karma;
+            }
+        }
+
+        chrome.browserAction.setBadgeText({ text: karma });
     });
 }
 

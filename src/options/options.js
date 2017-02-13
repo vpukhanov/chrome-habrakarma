@@ -140,31 +140,28 @@ function saveModalUser() {
     }
 
     requestUrl += userName;
-    $.ajax({
-        url: requestUrl,
-        type: 'GET',
-        dataType: 'html',
-        success: function(userPage) {
-            var tmpEl = $('<div>');
-            tmpEl.html(userPage);
 
-            var avatarElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.profile-page__user-avatar > img');
-            var avatarSrc = avatarElement.attr('src');
-            if (avatarSrc.indexOf('https://') == -1 && avatarSrc.indexOf('http://') == -1) {
-                avatarSrc = 'https://' + avatarSrc;
-            }
-
-            _options.users.push({
-                avatar: avatarSrc,
-                name: userName,
-                resource: resource
-            });
-            saveOptions();
-            $('#modal-add-account').modal('hide');
-        },
-        error: function() {
+    getDom(requestUrl, function(err, dom) {
+        if (err) {
             alert('Невозможно сохранить данного пользователя');
+            return;
         }
+
+        var tmpEl = $(dom);
+
+        var avatarElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.profile-page__user-avatar > img');
+        var avatarSrc = avatarElement.attr('src');
+        if (avatarSrc.indexOf('https://') == -1 && avatarSrc.indexOf('http://') == -1) {
+            avatarSrc = 'https://' + avatarSrc;
+        }
+
+        _options.users.push({
+            avatar: avatarSrc,
+            name: userName,
+            resource: resource
+        });
+        saveOptions();
+        $('#modal-add-account').modal('hide');
     });
 }
 

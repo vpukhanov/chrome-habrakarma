@@ -13,28 +13,24 @@ function loadKarmaAndRating(user, row) {
     }
     requestUrl += user.name;
 
-    $.ajax({
-        url: requestUrl,
-        type: 'GET',
-        dataType: 'html',
-        success: function(userPage) {
-            var tmpEl = $('<div>');
-            tmpEl.html(userPage);
-
-            var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
-            var ratingElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.rating > span');
-            var karma = karmaElement.text();
-
-            tKarma.text(karma);
-            if (karma[0] === '–') {
-                tKarma.addClass('account-karma-low');
-            }
-
-            tRating.text(ratingElement.text());
-        },
-        error: function() {
+    getDom(requestUrl, function(err, dom) {
+        if (err) {
             alert('Невозможно сохранить данного пользователя');
+            return;
         }
+
+        var tmpEl = $(dom);
+
+        var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
+        var ratingElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.rating > span');
+        var karma = karmaElement.text();
+
+        tKarma.text(karma);
+        if (karma[0] === '–') {
+            tKarma.addClass('account-karma-low');
+        }
+
+        tRating.text(ratingElement.text());
     });
 }
 
