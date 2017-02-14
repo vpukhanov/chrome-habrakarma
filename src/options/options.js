@@ -142,18 +142,12 @@ function saveModalUser() {
     requestUrl += userName;
 
     getDom(requestUrl, function(err, dom) {
-        if (err) {
+        if (err || !(dom instanceof HTMLDocument)) {
             alert('Невозможно сохранить данного пользователя');
             return;
         }
 
-        var tmpEl = $(dom);
-
-        var avatarElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.profile-page__user-avatar > img');
-        var avatarSrc = avatarElement.attr('src');
-        if (avatarSrc.indexOf('https://') == -1 && avatarSrc.indexOf('http://') == -1) {
-            avatarSrc = 'https://' + avatarSrc;
-        }
+        var avatarSrc = dom.querySelector('.profile-page__user-avatar > img').src;
 
         _options.users.push({
             avatar: avatarSrc,

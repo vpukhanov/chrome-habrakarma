@@ -14,23 +14,20 @@ function loadKarmaAndRating(user, row) {
     requestUrl += user.name;
 
     getDom(requestUrl, function(err, dom) {
-        if (err) {
+        if (err || !(dom instanceof HTMLDocument)) {
             alert('Невозможно сохранить данного пользователя');
             return;
         }
 
-        var tmpEl = $(dom);
-
-        var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
-        var ratingElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.rating > span');
-        var karma = karmaElement.text();
+        var karma = dom.querySelector('.karma > span').textContent;
+        var rating = dom.querySelector('.rating > span').textContent;
 
         tKarma.text(karma);
         if (karma[0] === '–') {
             tKarma.addClass('account-karma-low');
         }
 
-        tRating.text(ratingElement.text());
+        tRating.text(rating);
     });
 }
 

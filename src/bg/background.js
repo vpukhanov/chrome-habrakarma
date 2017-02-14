@@ -16,15 +16,12 @@ function updateBadge(user) {
     requestUrl += user.name;
 
     getDom(requestUrl, function(err, dom) {
-        if (err) {
+        if (err || !(dom instanceof HTMLDocument)) {
             chrome.browserAction.setBadgeText({ text: '' });
             return;
         }
 
-        var tmpEl = $(dom);
-
-        var karmaElement = tmpEl.find('#content > div.profile-page > div.profile-page__user > div.karma > span');
-        var karma = karmaElement.text();
+        var karma = dom.querySelector('.karma > span').textContent;
         karma = karma.replace(/\u2013|\u2014/g, '-');
 
         if (karma[0] === '-') {
