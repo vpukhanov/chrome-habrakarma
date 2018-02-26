@@ -115,8 +115,16 @@ function shiftDownUser() {
 
 function deleteUser() {
     var userId = $(this).data('user-id');
+    var specialChange;
+
+    if (_options.trackedUser && areUsersEqual(_options.trackedUser, _options.users[userId])) {
+        // If tracked user is removed, disable tracking
+        _options.trackedUser = null;
+        specialChange = 'changeTracked';
+    }
+
     _options.users.splice(userId, 1);
-    saveOptions();
+    saveOptions(specialChange);
 }
 
 function saveModalUser() {
