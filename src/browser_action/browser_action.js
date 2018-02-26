@@ -32,24 +32,30 @@ function loadKarmaAndRating(user, row) {
 }
 
 function restoreUsers(users) {
-    var tmpl = document.querySelector('#account-row');
-    var tAccountAvatar = tmpl.content.querySelector('.account-avatar');
-    var tAccountName = tmpl.content.querySelector('.account-name');
-    var tAccountResource = tmpl.content.querySelector('.account-resource');
-
     var tbody = document.querySelector('#accounts');
     $(tbody).empty();
 
-    users.forEach(function(user) {
-        tAccountAvatar.setAttribute('src', user.avatar);
-        tAccountName.textContent = user.name;
-        tAccountResource.setAttribute('src', '/img/' + user.resource + '.jpg');
+    if (users.length > 0) {
+        var tmpl = document.querySelector('#account-row');
+        var tAccountAvatar = tmpl.content.querySelector('.account-avatar');
+        var tAccountName = tmpl.content.querySelector('.account-name');
+        var tAccountResource = tmpl.content.querySelector('.account-resource');
 
+        users.forEach(function(user) {
+            tAccountAvatar.setAttribute('src', user.avatar);
+            tAccountName.textContent = user.name;
+            tAccountResource.setAttribute('src', '/img/' + user.resource + '.jpg');
+
+            var tr = document.importNode(tmpl.content, true);
+            loadKarmaAndRating(user, tr);
+
+            tbody.appendChild(tr);
+        });
+    } else {
+        var tmpl = document.querySelector('#hint-row');
         var tr = document.importNode(tmpl.content, true);
-        loadKarmaAndRating(user, tr);
-
         tbody.appendChild(tr);
-    });
+    }
 }
 
 function loadUsers() {

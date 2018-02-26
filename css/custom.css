@@ -27,3 +27,15 @@
 .account-rating {
     color: #c6c;
 }
+
+.container-bounce {
+    margin-top: 30px;
+}
+
+.heading-inline {
+    display: inline;
+}
+
+.row-primary-button {
+    text-align: right;
+}

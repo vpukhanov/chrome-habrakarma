@@ -32,9 +32,6 @@ function updateBadge(user) {
 
         if (karma.length > 4) {
             karma = '' + parseInt(karma, 10);
-            if (karma[0] !== '-') {
-                karma = '\u2248' + karma;
-            }
         }
 
         chrome.browserAction.setBadgeText({ text: karma });

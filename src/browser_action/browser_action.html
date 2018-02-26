@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/_parser.js"></script>
 
+	<title>HabraKarma Browser Action</title>
+
 	<style>
 	body {
 		width: 400px;
@@ -50,6 +52,15 @@
 			<td class="text-center"><img class="img-resource account-resource"></td>
 			<td class="account-karma text-center"></td>
 			<td class="account-rating text-center"></td>
+		</tr>
+	</template>
+
+	<!-- Template for empty table row -->
+	<template id="hint-row">
+		<tr>
+			<td colspan="5" class="text-center">
+				Добавьте аккаунты в настройках<br>(<span class="glyphicon glyphicon-cog"></span> в левом верхем углу)
+			</td>
 		</tr>
 	</template>
 
